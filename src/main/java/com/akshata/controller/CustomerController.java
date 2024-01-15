@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.akshata.entity.Customer;
-import com.akshata.service.CustomerService;
+import com.akshata.service.customer.CustomerService;
 
 @RestController
 @CrossOrigin("*")

@@ -1,18 +1,17 @@
-package com.akshata.service;
+package com.akshata.service.customer;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import com.akshata.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.akshata.entity.Customer;
 import com.akshata.repository.CustomerRepository;
 
-import net.bytebuddy.asm.Advice.This;
-
 @Service
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private CustomerRepository customerRepository;

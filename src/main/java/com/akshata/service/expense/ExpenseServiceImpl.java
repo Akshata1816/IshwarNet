@@ -1,8 +1,9 @@
-package com.akshata.service;
+package com.akshata.service.expense;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import com.akshata.service.expense.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import com.akshata.entity.Expense;
 import com.akshata.repository.ExpenseRepository;
 
 @Service
-public class ExpenseServiceImpl implements ExpenseService{
+public class ExpenseServiceImpl implements ExpenseService {
 
 	@Autowired
 	private ExpenseRepository expenseRepository;

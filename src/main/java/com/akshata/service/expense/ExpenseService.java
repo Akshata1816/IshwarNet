@@ -1,4 +1,4 @@
-package com.akshata.service;
+package com.akshata.service.expense;
 
 import java.util.Set;
 

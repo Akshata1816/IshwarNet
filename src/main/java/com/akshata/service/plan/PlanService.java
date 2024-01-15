@@ -1,4 +1,4 @@
-package com.akshata.service;
+package com.akshata.service.plan;
 
 import java.util.Set;
 

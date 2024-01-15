@@ -1,8 +1,9 @@
-package com.akshata.service;
+package com.akshata.service.plan;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import com.akshata.service.plan.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import com.akshata.entity.Plan;
 import com.akshata.repository.PlanRepository;
 
 @Service
-public class PlanServiceImpl implements PlanService{
+public class PlanServiceImpl implements PlanService {
 
 	@Autowired
 	private PlanRepository planRepository;

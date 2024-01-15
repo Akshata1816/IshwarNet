@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.akshata.entity.Expense;
-import com.akshata.service.ExpenseService;
+import com.akshata.service.expense.ExpenseService;
 
 @RestController
 @RequestMapping("/expense")

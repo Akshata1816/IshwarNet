@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.akshata.entity.Plan;
-import com.akshata.service.PlanService;
+import com.akshata.service.plan.PlanService;
 
 @RestController
 @CrossOrigin("*")

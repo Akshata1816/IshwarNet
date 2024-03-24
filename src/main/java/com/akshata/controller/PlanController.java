@@ -1,7 +1,10 @@
 package com.akshata.controller;
 
+import java.util.List;
 import java.util.Set;
 
+import com.akshata.entity.PredefinedMaster;
+import com.akshata.service.predefined.PredefinedMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +27,9 @@ public class PlanController {
 
 	@Autowired
 	private PlanService planService;
+
+	@Autowired
+	private PredefinedMasterService predefinedMasterService;
 	
 	@PostMapping("/add")
 	public ResponseEntity<Plan> addPlan(@RequestBody Plan plan) {
@@ -45,6 +51,11 @@ public class PlanController {
 	@GetMapping("/getAll")
 	public ResponseEntity<Set<Plan>> getPlans() {
 		return ResponseEntity.ok(this.planService.getPlans());
+	}
+
+	@GetMapping("/package-type/{code}")
+	public ResponseEntity<List<PredefinedMaster>> getPackageType(@PathVariable String code) {
+		return ResponseEntity.ok(this.predefinedMasterService.getPredefinedList(code));
 	}
 	
 	@DeleteMapping("/delete/{id}")

@@ -27,4 +27,15 @@ public class CustomerPlanController {
         return ResponseEntity.ok(this.customerPlanService.getCustomerPlanList());
     }
 
+    @PutMapping("/update")
+    public CustomerPlan updateCustomer(@RequestBody CustomerPlan customerPlan) {
+        return this.customerPlanService.updateCustomerPlan(customerPlan);
+    }
+
+    @GetMapping("/{id}")
+    public CustomerPlan getCustomerPlanById(@PathVariable long customerPlanId) {
+        return this.customerPlanService.getCustomerPlanById(customerPlanId);
+    }
+
+
 }

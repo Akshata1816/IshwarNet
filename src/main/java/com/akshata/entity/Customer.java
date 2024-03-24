@@ -1,28 +1,48 @@
 package com.akshata.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.GeneratorType;
 
 @Entity
 @Table(name = "customer")
-public class Customer {
+public class Customer extends Auditable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long customer_id;
 	private String customer_name;
 	private String username;
-	private long mob_number;
-	private long alt_mob_number;
+	private Long mob_number;
+	private Long alt_mob_number;
 	private String address;
 	private String city;
 	private String pincode;
 	private boolean status = true;
+
+	@ManyToOne(targetEntity = PredefinedMaster.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "packageTypeId")
+	private PredefinedMaster packageType;
+
+	@Column(name = "packageTypeId", insertable = false, updatable = false)
+	private Long packageTypeId;
+
+	public PredefinedMaster getPackageType() {
+		return packageType;
+	}
+
+	public void setPackageType(PredefinedMaster packageType) {
+		this.packageType = packageType;
+	}
+
+	public Long getPackageTypeId() {
+		return packageTypeId;
+	}
+
+	public void setPackageTypeId(Long packageTypeId) {
+		this.packageTypeId = packageTypeId;
+	}
+
 	public long getCustomer_id() {
 		return customer_id;
 	}
@@ -41,16 +61,16 @@ public class Customer {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public long getMob_number() {
+	public Long getMob_number() {
 		return mob_number;
 	}
-	public void setMob_number(long mob_number) {
+	public void setMob_number(Long mob_number) {
 		this.mob_number = mob_number;
 	}
-	public long getAlt_mob_number() {
+	public Long getAlt_mob_number() {
 		return alt_mob_number;
 	}
-	public void setAlt_mob_number(long alt_mob_number) {
+	public void setAlt_mob_number(Long alt_mob_number) {
 		this.alt_mob_number = alt_mob_number;
 	}
 	public String getAddress() {

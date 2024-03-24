@@ -38,6 +38,27 @@ public class CustomerPlan extends Auditable{
 
     private String packageType;
 
+    @Transient
+    private Double currentPaidAmount;
+
+    private String paidAmount;
+
+    public String getPaidAmount() {
+        return paidAmount;
+    }
+
+    public void setPaidAmount(String paidAmount) {
+        this.paidAmount = paidAmount;
+    }
+
+    public Double getCurrentPaidAmount() {
+        return currentPaidAmount;
+    }
+
+    public void setCurrentPaidAmount(Double currentPaidAmount) {
+        this.currentPaidAmount = currentPaidAmount;
+    }
+
     @ManyToOne(targetEntity = PredefinedMaster.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "predefinedId")
     private PredefinedMaster predefinedMaster;

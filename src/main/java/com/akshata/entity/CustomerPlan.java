@@ -60,26 +60,26 @@ public class CustomerPlan extends Auditable{
     }
 
     @ManyToOne(targetEntity = PredefinedMaster.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "predefinedId")
-    private PredefinedMaster predefinedMaster;
+    @JoinColumn(name = "statusId")
+    private PredefinedMaster status;
 
-    @Column(name = "predefinedId", insertable = false, updatable = false)
-    private Long predefinedId;
+    @Column(name = "statusId", insertable = false, updatable = false)
+    private Long statusId;
 
-    public PredefinedMaster getPredefinedMaster() {
-        return predefinedMaster;
+    public PredefinedMaster getStatus() {
+        return status;
     }
 
-    public void setPredefinedMaster(PredefinedMaster predefinedMaster) {
-        this.predefinedMaster = predefinedMaster;
+    public Long getStatusId() {
+        return statusId;
     }
 
-    public Long getPredefinedId() {
-        return predefinedId;
+    public void setStatus(PredefinedMaster status) {
+        this.status = status;
     }
 
-    public void setPredefinedId(Long predefinedId) {
-        this.predefinedId = predefinedId;
+    public void setStatusId(Long statusId) {
+        this.statusId = statusId;
     }
 
     public long getCustomerPlanId() {

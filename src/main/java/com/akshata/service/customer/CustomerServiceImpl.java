@@ -55,6 +55,9 @@ public class CustomerServiceImpl implements CustomerService {
 			oldCustomer.setAddress(customer.getPincode());
 		}
 
+		if (customer.getPackageType() != null && customer.getPackageType().getPredefinedId() != null && (oldCustomer.getPackageType() == null || !customer.getPackageType().getPredefinedId().equals(oldCustomer.getPackageType().getPredefinedId()))) {
+			oldCustomer.setPackageType(customer.getPackageType());
+		}
 		oldCustomer.setLastModifieDate(new Date());
 
 		return this.customerRepository.save(oldCustomer);

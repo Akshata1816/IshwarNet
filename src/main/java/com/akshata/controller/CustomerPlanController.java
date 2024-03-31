@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -37,5 +38,19 @@ public class CustomerPlanController {
         return this.customerPlanService.getCustomerPlanById(customerPlanId);
     }
 
+    @GetMapping("/getList/status/{customerId}")
+    public ResponseEntity<List<CustomerPlan>> getCustomerPlanStatusList(@PathVariable Long customerId) {
+        return ResponseEntity.ok(this.customerPlanService.getCustomerPlanByStatus(customerId));
+    }
+
+    @GetMapping("/active/{customerId}")
+    public ResponseEntity<CustomerPlan> getCustomerPlanStatusByCustId(@PathVariable Long customerId) throws Exception {
+        return ResponseEntity.ok(this.customerPlanService.getCustomerPlanByCustId(customerId));
+    }
+
+    @GetMapping("/geCustomerList/{customerId}")
+    public ResponseEntity<List<CustomerPlan>> getCustomerPlanCustomerList(@PathVariable Long customerId) {
+        return ResponseEntity.ok(this.customerPlanService.getCustomerPlanByCustomerId(customerId));
+    }
 
 }

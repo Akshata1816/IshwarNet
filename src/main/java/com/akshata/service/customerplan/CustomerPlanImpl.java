@@ -11,10 +11,7 @@ import com.akshata.service.predefined.PredefinedMasterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class CustomerPlanImpl implements CustomerPlanService {
@@ -84,7 +81,7 @@ public class CustomerPlanImpl implements CustomerPlanService {
         }
 
         PredefinedMaster predefinedMaster = predefinedMasterService.getPredefinedByCodeAndName("ACTIVE","STATUS");
-        customerPlan.setPredefinedMaster(predefinedMaster);
+        customerPlan.setStatus(predefinedMaster);
 
         customerPlan = this.customerPlanRepository.save(customerPlan);
 
@@ -126,5 +123,24 @@ public class CustomerPlanImpl implements CustomerPlanService {
         return this.customerPlanRepository.findById(customerPlanId).get();
     }
 
+    @Override
+    public List<CustomerPlan> getCustomerPlanByStatus(Long customerId) {
+        PredefinedMaster predefinedMaster = predefinedMasterService.getPredefinedByCodeAndName("ACTIVE","STATUS");
+        return this.customerPlanRepository.findByStatusIdAndCustomerId(predefinedMaster.getPredefinedId(),customerId);
+    }
+
+    @Override
+    public CustomerPlan getCustomerPlanByCustId(Long customerId) throws Exception {
+        PredefinedMaster predefinedMaster = predefinedMasterService.getPredefinedByCodeAndName("ACTIVE","STATUS");
+        List<CustomerPlan> customerPlanList = this.customerPlanRepository.findByStatusIdAndCustomerId(predefinedMaster.getPredefinedId(),customerId);
+        if(customerPlanList != null && !customerPlanList.isEmpty())
+            return customerPlanList.get(0);
+        throw new Exception("customerId with Id: " + customerId + " not found");
+    }
+
+    @Override
+    public List<CustomerPlan> getCustomerPlanByCustomerId(Long customerId) {
+        return this.customerPlanRepository.findByCustomerIdOrderByCustomerPlanIdDesc(customerId);
+    }
 
 }

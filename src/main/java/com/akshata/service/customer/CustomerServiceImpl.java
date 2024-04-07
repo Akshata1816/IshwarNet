@@ -1,12 +1,10 @@
 package com.akshata.service.customer;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import com.akshata.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.akshata.entity.Customer;
@@ -73,8 +71,11 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Set<Customer> getCustomers() {
-		return new HashSet<>(this.customerRepository.findAll());
+	public List<Customer> getCustomers() {
+		// Define sorting criteria
+//		Sort sortByDesc = Sort.by(Sort.Direction.DESC, "customer_id"); // Replace "fieldName" with the actual field you want to sort by
+
+		return new ArrayList<>(this.customerRepository.findAll());
 	}
 
 	@Override

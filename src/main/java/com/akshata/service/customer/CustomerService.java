@@ -1,5 +1,6 @@
 package com.akshata.service.customer;
 
+import java.util.List;
 import java.util.Set;
 
 import com.akshata.entity.Customer;
@@ -12,7 +13,7 @@ public interface CustomerService {
 	
 	public Customer getCustomer(long c_id);
 	
-	public Set<Customer> getCustomers();
+	public List<Customer> getCustomers();
 	
 	public void deleteCustomer(long c_id);
 

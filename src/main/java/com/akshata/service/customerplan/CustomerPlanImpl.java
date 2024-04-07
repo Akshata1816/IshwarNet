@@ -39,28 +39,42 @@ public class CustomerPlanImpl implements CustomerPlanService {
         customerPlan.setPlan(plan);
 
         if(customerPlan.getDiscount() != null){
+            Double afterPaid = 0.0;
             Double afterDiscount = plan.getCustomer_amount() - customerPlan.getDiscount();
             customerPlan.setTotalAmount(afterDiscount);
-            customerPlan.setRemainingAmount(afterDiscount);
+            if(customerPlan.getCurrentPaidAmount() != null){
+                afterPaid = afterDiscount - customerPlan.getCurrentPaidAmount();
+            }
+            else {
+                afterPaid = afterDiscount;
+            }
+            customerPlan.setRemainingAmount(afterPaid);
+
         }
         else {
+            Double afterPaid = 0.0;
             customerPlan.setTotalAmount(plan.getCustomer_amount());
-            customerPlan.setRemainingAmount(plan.getCustomer_amount());
+            if(customerPlan.getCurrentPaidAmount() != null){
+                afterPaid = plan.getCustomer_amount() - customerPlan.getCurrentPaidAmount();
+            }else {
+                afterPaid = plan.getCustomer_amount();
+            }
+            customerPlan.setRemainingAmount(afterPaid);
         }
 
         Date startDate = customerPlan.getStartDate();
 
-        if(customerPlan.getPackageType() != null && !customerPlan.getPackageType().isEmpty()){
+        if(customer.getPackageType() != null && customer.getPackageType().getPredefinedId() != null ){
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(startDate);
 
-            if(customer.getPackageType().getCode().equals("MONTHLY")){
+            if(customer.getPackageType().getName().equals("MONTHLY")){
                 calendar.add(Calendar.DAY_OF_MONTH, 29);
-            }else if(customer.getPackageType().getCode().equals("QUARTERLY")){
+            }else if(customer.getPackageType().getName().equals("QUARTERLY")){
                 calendar.add(Calendar.DAY_OF_MONTH, 89);
-            }else if(customer.getPackageType().getCode().equals("HALF-YEARLY")){
+            }else if(customer.getPackageType().getName().equals("HALF-YEARLY")){
                 calendar.add(Calendar.DAY_OF_MONTH, 179);
-            }else if(customer.getPackageType().getCode().equals("YEARLY")){
+            }else if(customer.getPackageType().getName().equals("YEARLY")){
                 calendar.add(Calendar.DAY_OF_YEAR, 359);
             }
 
@@ -80,7 +94,7 @@ public class CustomerPlanImpl implements CustomerPlanService {
             customerPlan.setEndDate(calendar.getTime());
         }
 
-        PredefinedMaster predefinedMaster = predefinedMasterService.getPredefinedByCodeAndName("ACTIVE","STATUS");
+        PredefinedMaster predefinedMaster = predefinedMasterService.getPredefinedByCodeAndName("STATUS","ACTIVE");
         customerPlan.setStatus(predefinedMaster);
 
         customerPlan = this.customerPlanRepository.save(customerPlan);
@@ -125,13 +139,13 @@ public class CustomerPlanImpl implements CustomerPlanService {
 
     @Override
     public List<CustomerPlan> getCustomerPlanByStatus(Long customerId) {
-        PredefinedMaster predefinedMaster = predefinedMasterService.getPredefinedByCodeAndName("ACTIVE","STATUS");
+        PredefinedMaster predefinedMaster = predefinedMasterService.getPredefinedByCodeAndName("STATUS","ACTIVE");
         return this.customerPlanRepository.findByStatusIdAndCustomerId(predefinedMaster.getPredefinedId(),customerId);
     }
 
     @Override
     public CustomerPlan getCustomerPlanByCustId(Long customerId) throws Exception {
-        PredefinedMaster predefinedMaster = predefinedMasterService.getPredefinedByCodeAndName("ACTIVE","STATUS");
+        PredefinedMaster predefinedMaster = predefinedMasterService.getPredefinedByCodeAndName("STATUS","ACTIVE");
         List<CustomerPlan> customerPlanList = this.customerPlanRepository.findByStatusIdAndCustomerId(predefinedMaster.getPredefinedId(),customerId);
         if(customerPlanList != null && !customerPlanList.isEmpty())
             return customerPlanList.get(0);

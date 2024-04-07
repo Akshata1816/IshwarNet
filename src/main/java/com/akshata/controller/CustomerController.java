@@ -1,5 +1,6 @@
 package com.akshata.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/getAll")
-	public ResponseEntity<Set<Customer>> getCustomers() {
+	public ResponseEntity<List<Customer>> getCustomers() {
 		return ResponseEntity.ok(this.customerService.getCustomers());
 	}
 	
